@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="ezpcap" default="build_jar" basedir=".">
+<project name="ezcap" default="build_jar" basedir=".">
 
 	<property name="src_dir" value="src"/>
 	<property name="lib_dir" value="lib"/>
