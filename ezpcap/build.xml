@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ezpcap" default="build_jar" basedir=".">
+
+	<property name="src_dir" value="src"/>
+	<property name="lib_dir" value="lib"/>
+	<property name="classes_dir" value="bin"/>
+
+	<property name="jar_name" value="cap.jar"/>
+	<property name="main" value="com.nativewrapper.cap.Test"/>
+
+	<target name="compile">
+		<mkdir dir="${classes_dir}" />
+		<javac includeantruntime="false" srcdir="${src_dir}" destdir="${classes_dir}" debug="true">
+			<compilerarg value="-Xlint:unchecked" />
+		</javac>
+	</target>
+
+	<target name="build_jar" depends="compile">
+		<jar jarfile="${jar_name}" basedir="${classes_dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main}"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="${classes_dir}" />
+		<delete file="${jar_name}" />
+	</target>
+
+</project>
