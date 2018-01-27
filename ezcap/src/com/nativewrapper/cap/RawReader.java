@@ -148,7 +148,7 @@ public final class RawReader {
 		return len;
 	}
 
-	public static int getIntValue (byte[] data, int size, ByteOrder ENDIAN, int off) {
+	private static int getIntValue (byte[] data, int size, ByteOrder ENDIAN, int off) {
 		if ((size != Defines.UINT8_SIZE) && (size != Defines.UINT16_SIZE)) {
 			throw new IllegalArgumentException ("invalid argument.");
 		}
@@ -187,7 +187,7 @@ public final class RawReader {
 		return value;
 	}
 
-	public static long getLongValue (byte[] data, int size, ByteOrder ENDIAN, int off) {
+	private static long getLongValue (byte[] data, int size, ByteOrder ENDIAN, int off) {
 		if (size != Defines.UINT32_SIZE) {
 			throw new IllegalArgumentException ("invalid argument.");
 		}
@@ -219,6 +219,95 @@ public final class RawReader {
 		}
 
 		return value;
+	}
+
+	public static void hexDump (String s) {
+		if (s == null || s.isEmpty()) {
+			return ;
+		}
+
+		byte [] arr = s.getBytes ();
+		hexDump (arr);
+	}
+
+	public static void hexDump (byte [] inArr) {
+		if ((inArr == null) || (inArr.length == 0)) {
+			return;
+		}
+
+		byte [] arr = inArr; 
+
+		int remain = arr.length;
+		int line = 0;
+		while (remain >= 16) {
+			//line header
+			System.out.print (String.format ("0x%08x: ", line));
+			
+			String lineStr = String.format (
+					"%02x %02x %02x %02x %02x %02x %02x %02x  %02x %02x %02x %02x %02x %02x %02x %02x", 
+					arr[line*16+0], arr[line*16+1], arr[line*16+2], arr[line*16+3], arr[line*16+4], arr[line*16+5], arr[line*16+6], arr[line*16+7],
+					arr[line*16+8], arr[line*16+9], arr[line*16+10], arr[line*16+11], arr[line*16+12], arr[line*16+13], arr[line*16+14], arr[line*16+15]
+					);
+			System.out.print (lineStr);
+			System.out.print ("  ");
+			
+			// ascii
+			System.out.print ("|");
+			for (int k = 0; k < 16; ++ k) {
+				System.out.print (String.format ("%c", (arr[line*16+k] > 0x1f) && (arr[line*16+k] < 0x7f) ? arr[line*16+k] : '.'));
+			}
+			System.out.print ("|");
+			System.out.println ();
+			
+			++ line;
+			remain -= 16;
+		}
+		
+		int j = 0;
+		if (remain > 0) {
+			// line header
+			System.out.print (String.format ("0x%08x: ", line));
+			
+			while (j < 16) {
+				if (j < remain) {
+					System.out.print (String.format("%02x", arr[line*16+j]));
+
+					if (j == 7) {
+						System.out.print ("  ");
+					} else if (j == 15) {
+					} else {
+						System.out.print (" ");
+					}
+					
+				} else {
+					System.out.print ("  ");
+
+					if (j == 7) {
+						System.out.print ("  ");
+					} else if (j == 15) {
+					} else {
+						System.out.print (" ");
+					}
+				}
+
+				++ j;
+			}
+			
+			// ascii
+			System.out.print ("  ");
+			System.out.print ("|");
+			int k = 0;
+			while (k < remain) {
+				System.out.print (String.format ("%c", (arr[line*16+k] > 0x1f) && (arr[line*16+k] < 0x7f) ? arr[line*16+k] : '.'));
+				++ k;
+			}
+			for (int i = 0; i < (16 - remain); ++ i) {
+				System.out.print (" ");
+			}
+			System.out.print ("|");
+		}
+		
+		System.out.println();
 	}
 
 }

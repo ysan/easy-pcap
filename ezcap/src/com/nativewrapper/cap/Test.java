@@ -39,6 +39,8 @@ public class Test {
 				System.out.println (ip);
 			}
 
+			System.out.println ("hexDump:");
+			RawReader.hexDump (packet.getRaw());
 		}
 	};
 

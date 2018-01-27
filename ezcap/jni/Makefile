@@ -17,10 +17,8 @@ CFLAGS		:= -Wall -O0 -MD -std=c++11
 INCLUDES	:= \
 	-I./ \
 	-I./cap \
-	-I/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.79-2.5.5.0.fc20.x86_64/include \
-	-I/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.79-2.5.5.0.fc20.x86_64/include/linux \
-	-I/usr/lib/jvm/java-1.7.0-openjdk-amd64/include \
-	-I/usr/lib/jvm/java-1.7.0-openjdk-amd64/include/linux \
+	-I/usr/lib/jvm/java-1.8.0/include \
+	-I/usr/lib/jvm/java-1.8.0/include/linux \
 
 LIBS		:= -lpthread -lpcap
 LDFLAGS		:= -fPIC -shared $(LIBS)
