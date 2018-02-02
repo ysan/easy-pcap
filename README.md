@@ -1,4 +1,4 @@
-libpcap wrapper
+easy pcap
 ===============
 
 libpcap wrapper (study to overcome the painful jni.) 
@@ -39,4 +39,4 @@ How to execute
 Platforms
 ------------
 Linux generally will be ok. (confirmed worked on Fedora20)
-
+OpenJDK 1.8
