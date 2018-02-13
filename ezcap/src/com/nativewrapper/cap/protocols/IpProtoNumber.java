@@ -3,7 +3,7 @@ package com.nativewrapper.cap.protocols;
 import java.util.Map;
 import java.util.HashMap;
 
-public enum IpProtocolNumber {
+public enum IpProtoNumber {
 
 	// http://www.infraexpert.com/study/tea11.htm
 	ICMP       (  1, "ICMP", "Internet Control Message"),
@@ -38,7 +38,7 @@ public enum IpProtocolNumber {
 	private String mName;
 	private String mDesc;
  
-	private IpProtocolNumber (int protoNum, String name, String desc) {
+	private IpProtoNumber (int protoNum, String name, String desc) {
 		mProtoNum = protoNum;
 		mName = name;
 		mDesc = desc;
@@ -51,14 +51,14 @@ public enum IpProtocolNumber {
 
 	private static final Map <Integer, String> nameMap = new HashMap <Integer, String>();
 	static {
-		for (IpProtocolNumber entry : values()) {
+		for (IpProtoNumber entry : values()) {
 			nameMap.put (entry.mProtoNum, entry.mName);
 		}
 	}
 
 	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
 	static {
-		for (IpProtocolNumber entry : values()) {
+		for (IpProtoNumber entry : values()) {
 			descMap.put (entry.mProtoNum, entry.mDesc);
 		}
 	}

@@ -28,15 +28,19 @@ public class Test {
 			RawReader.toStruct (eh, packet.getRaw(), 0);
 			System.out.println (eh);
 
-			if (eh.getType() == EtherType.ETHERTYPE_ARP.getType()) {
+			if (eh.getType() == EtherType.ARP.getType()) {
 				EtherArp ea = new EtherArp();
 				RawReader.toStruct (ea, packet.getRaw(), eh.length());
 				System.out.println (ea);
 
-			} else if (eh.getType() == EtherType.ETHERTYPE_IP.getType()) {
+			} else if (eh.getType() == EtherType.IP.getType()) {
 				Ip ip = new Ip();
 				RawReader.toStruct (ip, packet.getRaw(), eh.length());
 				System.out.println (ip);
+
+				if (ip.getProto() == IpProtoNumber.ICMP.getProtoNum()) {
+					System.out.println ("icmp");
+				}
 			}
 
 			System.out.println ("hexDump:");

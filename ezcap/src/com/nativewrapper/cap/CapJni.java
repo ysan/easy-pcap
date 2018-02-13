@@ -70,7 +70,7 @@ public class CapJni {
 	}
 
 	public List<Interface> getInterfaceList () {
-		List<Interface> rtn = new ArrayList();
+		List<Interface> rtn = new ArrayList<Interface>();
 		rtn.clear();
 		int n = nativeGetInterfaceList (rtn);
 		return rtn;
