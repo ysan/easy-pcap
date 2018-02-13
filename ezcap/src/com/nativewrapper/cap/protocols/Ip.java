@@ -109,7 +109,7 @@ public class Ip {
 		String d = String.format ("m_ip_id=[%d]", m_ip_id);
 		String e = String.format ("m_ip_off=[flags:0x%02x][offset:%d]", (m_ip_off >> 13) & 0x07, m_ip_off & 0x1fff);
 		String f = String.format ("m_ip_ttl=[%d]", m_ip_ttl);
-		String g = String.format ("m_ip_p=[%d](%s)", m_ip_p, IpProtocolNumber.getName(m_ip_p));
+		String g = String.format ("m_ip_p=[%d](%s)", m_ip_p, IpProtoNumber.getName(m_ip_p));
 		String h = String.format ("m_ip_sum=[0x%04x]", m_ip_sum);
 		return a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + g + " " + h + " m_ip_src=[" + m_ip_src + "]" + " m_ip_dst=[" + m_ip_dst + "]" + " mLength=[" + mLength + "]";
 	}

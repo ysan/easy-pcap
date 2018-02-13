@@ -3,7 +3,7 @@ package com.nativewrapper.cap.protocols;
 import java.util.Map;
 import java.util.HashMap;
 
-public enum IcmpRedirectCodes {
+public enum IcmpRedirectCode {
 
 	// netinet/ip_icmp.h
 	NET      (0, "Redirect Net"),
@@ -15,7 +15,7 @@ public enum IcmpRedirectCodes {
 	private int mCode;
 	private String mDesc;
  
-	private IcmpRedirectCodes (int type, String desc) {
+	private IcmpRedirectCode (int type, String desc) {
 		mCode = type;
 		mDesc = desc;
 	}
@@ -27,7 +27,7 @@ public enum IcmpRedirectCodes {
 
 	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
 	static {
-		for (IcmpRedirectCodes entry : values()) {
+		for (IcmpRedirectCode entry : values()) {
 			descMap.put (entry.mCode, entry.mDesc);
 		}
 	}

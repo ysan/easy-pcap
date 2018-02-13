@@ -3,7 +3,7 @@ package com.nativewrapper.cap.protocols;
 import java.util.Map;
 import java.util.HashMap;
 
-public enum IcmpTimeExceededCodes {
+public enum IcmpTimeExceededCode {
 
 	// netinet/ip_icmp.h
 	TTL       (0, "TTL count exceeded"),
@@ -13,7 +13,7 @@ public enum IcmpTimeExceededCodes {
 	private int mCode;
 	private String mDesc;
  
-	private IcmpTimeExceededCodes (int type, String desc) {
+	private IcmpTimeExceededCode (int type, String desc) {
 		mCode = type;
 		mDesc = desc;
 	}
@@ -25,7 +25,7 @@ public enum IcmpTimeExceededCodes {
 
 	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
 	static {
-		for (IcmpTimeExceededCodes entry : values()) {
+		for (IcmpTimeExceededCode entry : values()) {
 			descMap.put (entry.mCode, entry.mDesc);
 		}
 	}

@@ -3,7 +3,7 @@ package com.nativewrapper.cap.protocols;
 import java.util.Map;
 import java.util.HashMap;
 
-public enum IcmpUnreachCodes {
+public enum IcmpUnreachCode {
 
 	// netinet/ip_icmp.h
 	NET_UNREACH     ( 0, "Network Unreachable Reply"),
@@ -27,7 +27,7 @@ public enum IcmpUnreachCodes {
 	private int mCode;
 	private String mDesc;
  
-	private IcmpUnreachCodes (int type, String desc) {
+	private IcmpUnreachCode (int type, String desc) {
 		mCode = type;
 		mDesc = desc;
 	}
@@ -39,7 +39,7 @@ public enum IcmpUnreachCodes {
 
 	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
 	static {
-		for (IcmpUnreachCodes entry : values()) {
+		for (IcmpUnreachCode entry : values()) {
 			descMap.put (entry.mCode, entry.mDesc);
 		}
 	}
