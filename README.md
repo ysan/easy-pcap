@@ -38,5 +38,5 @@ How to execute
 	
 Platforms
 ------------
-Linux generally will be ok. (confirmed worked on Fedora20)
+Generic Linux will be ok. (confirmed worked on Fedora20)  
 OpenJDK 1.8
