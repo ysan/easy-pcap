@@ -30,12 +30,34 @@ Please edit the Makefile.
 	LIBS        := -lpthread -lpcap
 	(snip)
 
-How to execute
+Usage
 --------
+Please specify the target interface name after starting run.sh.
 
 	$ cd easy-pcap/ezcap
 	$ sudo ./run.sh
-	
+	.
+	.
+	.
+	Enter interface name: eth0   <-- Please specify the target interface name
+	[eth0]
+	listener id:0
+	### start ###
+	mReqQueueVector.size()=[1]
+	mReqQueueVector.erase
+	pcap_loop start. if=enp24s0
+	ezcap >                      <-- console start
+
+capture start and console start.
+
+Command
+------------
+* start - capture start/restart
+* stop - capture stop
+* quit - process exit
+* set ***expression*** - set pcap filter
+* clear - clear pcap filter
+
 Platforms
 ------------
 Generic Linux will be ok. (confirmed worked on Fedora20)  

@@ -100,7 +100,7 @@ public class Test {
 		String lineBuf = "";
 		try {
 			while (true) {
-				System.out.print ("> ");
+				System.out.print ("ezcap > ");
 
 				lineBuf = stdReader.readLine();
 				String line = lineBuf.trim();
