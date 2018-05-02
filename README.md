@@ -39,4 +39,4 @@ How to execute
 Platforms
 ------------
 Generic Linux will be ok. (confirmed worked on Fedora20)  
-OpenJDK 1.8
+Requires are java, libpcap.
