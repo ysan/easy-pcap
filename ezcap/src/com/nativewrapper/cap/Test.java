@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import com.nativewrapper.cap.CapJni;
 import com.nativewrapper.cap.IPacketListener;
@@ -61,12 +63,13 @@ public class Test {
 		if (ifList.size() == 0) {
 			System.exit(1);
 		} else {
+			System.out.print ("\nnetwork interfaces\n");
 			for (int i = 0; i < ifList.size(); ++ i) {
-				System.out.println ("nic" + i + ": " + ifList.get(i).getName() + " " + ifList.get(i).getAddress());
+				System.out.println (" - [" + ifList.get(i).getName() + "] " + ifList.get(i).getAddress());
 			}
 		}
 
-		System.out.print ("\nenter network interface: ");
+		System.out.print ("Enter interface name: ");
 		String nic = "";
 		try {
 			while (true) { 
@@ -89,14 +92,21 @@ public class Test {
 		int id = mCap.registerPacketListener (pktListener);
 		System.out.println ("listener id:" + id);
 
+		System.out.println ("### start ###");
+		if (!mCap.start()) {
+			System.exit(1);
+		}
 
-		String line = "";
+		String lineBuf = "";
 		try {
-			while (true) { 
-				line = stdReader.readLine();
+			while (true) {
+				System.out.print ("> ");
+
+				lineBuf = stdReader.readLine();
+				String line = lineBuf.trim();
 				if (line.equals("")) {
 
-				} else if (line.equals("q")) {
+				} else if (line.equals("quit")) {
 					System.out.println ("### quit ###");
 					break;
 
@@ -115,8 +125,22 @@ public class Test {
 					mCap.clearFilter();
 
 				} else  {
-					System.out.println ("### set filter ### --> [" + line + "]");
-					mCap.setFilter (line);
+					String filter = "";
+					String regex = "^set +";
+					Pattern p = Pattern.compile(regex);
+					Matcher m = p.matcher (line);
+					if (m.find()) {
+						filter = line.substring (m.end());
+						if ((filter == null) || (filter.isEmpty())) {
+							System.out.println ("invalid command... [" + line + "]");
+						} else {
+							System.out.println ("### set filter ### --> [" + filter + "]");
+							mCap.setFilter (filter);
+						}
+
+					} else {
+						System.out.println ("invalid command... [" + line + "]");
+					}
 				}
 			}
 		} catch (Exception e) {
