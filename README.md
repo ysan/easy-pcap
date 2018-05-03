@@ -30,7 +30,7 @@ Please edit the Makefile.
 	LIBS        := -lpthread -lpcap
 	(snip)
 
-Usage
+Usage (launch cli)
 --------
 Please specify the target interface name after starting run.sh.
 
@@ -50,13 +50,25 @@ Please specify the target interface name after starting run.sh.
 
 capture start and console start.
 
-Command
+Console command
 ------------
-* start - capture start/restart
-* stop - capture stop
-* quit - process exit
-* set ***expression*** - set pcap filter
-* clear - clear pcap filter
+	start
+&nbsp;&nbsp;&nbsp;&nbsp;capture start/restart
+
+	stop
+&nbsp;&nbsp;&nbsp;&nbsp;capture stop
+
+	quit
+&nbsp;&nbsp;&nbsp;&nbsp;process exit
+
+	set expression
+&nbsp;&nbsp;&nbsp;&nbsp;set pcap filter ***expression***   
+&nbsp;&nbsp;&nbsp;&nbsp;selects which packets will be dumped. If no expression is given, all packets on  
+&nbsp;&nbsp;&nbsp;&nbsp;the net will be dumped. Otherwise, only packets for which expression is true  
+&nbsp;&nbsp;&nbsp;&nbsp;will be dumped.
+
+	clear
+&nbsp;&nbsp;&nbsp;&nbsp;clear pcap filter
 
 Platforms
 ------------
