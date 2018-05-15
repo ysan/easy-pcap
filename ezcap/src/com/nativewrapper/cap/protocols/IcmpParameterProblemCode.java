@@ -3,18 +3,19 @@ package com.nativewrapper.cap.protocols;
 import java.util.Map;
 import java.util.HashMap;
 
-public enum IcmpTimeExceededCode {
+public enum IcmpParameterProblemCode {
 
 	// http://www.infraexpert.com/info/5.0adsl.htm
-	// ICMP Type 11： Time Exceeded
-	TTL       (0, "Time to Live exceeded in Transit"),
-	FRAGTIME  (1, "Fragment Reassembly Time Exceeded");
+	// ICMP Type 12 ：Parameter Problem
+	PONTER_ERROR     (0, "Pointer indicates the error"),
+	MISS_REQ_OPTION  (1, "Missing a Required Option"),
+	BAD_LENGTH       (2, "Bad Length");
 
 
 	private int mCode;
 	private String mDesc;
  
-	private IcmpTimeExceededCode (int code, String desc) {
+	private IcmpParameterProblemCode (int code, String desc) {
 		mCode = code;
 		mDesc = desc;
 	}
@@ -26,7 +27,7 @@ public enum IcmpTimeExceededCode {
 
 	private static final Map <Integer, String> mDescMap = new HashMap <Integer, String>();
 	static {
-		for (IcmpTimeExceededCode entry : values()) {
+		for (IcmpParameterProblemCode entry : values()) {
 			mDescMap.put (entry.mCode, entry.mDesc);
 		}
 	}

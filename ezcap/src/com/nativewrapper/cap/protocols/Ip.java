@@ -7,13 +7,13 @@ public class Ip {
 	// -- netinet/ip.h --
 	// struct ip
 	//   {
-	//     unsigned int ip_v:4;        /* version */  // __BIG_ENDIAN
-	//     unsigned int ip_hl:4;       /* header length */  // __BIG_ENDIAN
-	//     u_int8_t ip_tos;            /* type of service */
+	//     unsigned int ip_v:4;    /* version */  // __BIG_ENDIAN
+	//     unsigned int ip_hl:4;   /* header length */  // __BIG_ENDIAN
+	//     u_int8_t ip_tos;        /* type of service */
 	//     u_short ip_len;         /* total length */
 	//     u_short ip_id;          /* identification */
 	//     u_short ip_off;         /* fragment offset field */
-	//     u_int8_t ip_ttl;            /* time to live */
+	//     u_int8_t ip_ttl;        /* time to live */
 	//     u_int8_t ip_p;          /* protocol */
 	//     u_short ip_sum;         /* checksum */
 	//     struct in_addr ip_src, ip_dst;  /* source and dest address */
@@ -58,7 +58,7 @@ public class Ip {
 	}
 
 	public int getHeaderLen () {
-		return m_ip_v__ip_hl & 0xf;
+		return (m_ip_v__ip_hl & 0xf) * 4;
 	}
 
 	public int getTos () {
@@ -85,7 +85,7 @@ public class Ip {
 		return m_ip_p;
 	}
 
-	public int getSum () {
+	public int getCksum () {
 		return m_ip_sum;
 	}
 
@@ -103,7 +103,7 @@ public class Ip {
 
 	@Override
 	public String toString () {
-		String a = String.format ("m_ip_v__ip_hl=[v%d][hl:%d*4]", (m_ip_v__ip_hl >> 4) & 0xf, m_ip_v__ip_hl & 0xf);
+		String a = String.format ("m_ip_v__ip_hl=[v%d][hl:%d]", (m_ip_v__ip_hl >> 4) & 0xf, (m_ip_v__ip_hl & 0xf) * 4);
 		String b = String.format ("m_ip_tos=[%d]", m_ip_tos);
 		String c = String.format ("m_ip_len=[%d]", m_ip_len);
 		String d = String.format ("m_ip_id=[%d]", m_ip_id);

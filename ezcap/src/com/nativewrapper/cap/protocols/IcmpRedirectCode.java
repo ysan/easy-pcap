@@ -5,18 +5,19 @@ import java.util.HashMap;
 
 public enum IcmpRedirectCode {
 
-	// netinet/ip_icmp.h
-	NET      (0, "Redirect Net"),
-	HOST     (1, "Redirect Host"),
-	NETTOS   (2, "Redirect Net for TOS"),
-	HOSTTOS  (3, "Redirect Host for TOS");
+	// http://www.infraexpert.com/info/5.0adsl.htm
+	// ICMP Type 5 ： Redirect
+	NET      (0, "Redirect Datagram for the Network (or subnet) "),
+	HOST     (1, "Redirect Datagram for the Host"),
+	NETTOS   (2, "Redirect Datagram for the ToS and Network"),
+	HOSTTOS  (3, "Redirect Datagram for the ToS and Host");
 
 
 	private int mCode;
 	private String mDesc;
  
-	private IcmpRedirectCode (int type, String desc) {
-		mCode = type;
+	private IcmpRedirectCode (int code, String desc) {
+		mCode = code;
 		mDesc = desc;
 	}
 
@@ -25,16 +26,19 @@ public enum IcmpRedirectCode {
 	}
  
 
-	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
+	private static final Map <Integer, String> mDescMap = new HashMap <Integer, String>();
 	static {
 		for (IcmpRedirectCode entry : values()) {
-			descMap.put (entry.mCode, entry.mDesc);
+			mDescMap.put (entry.mCode, entry.mDesc);
 		}
 	}
+	public static Map get () {
+		return mDescMap;
+	}
 
-	public static String getDesc (int type) {
-		if (descMap.containsKey(type)) {
-			return descMap.get (type);
+	public static String getDesc (int code) {
+		if (mDescMap.containsKey(code)) {
+			return mDescMap.get (code);
 		} else {
 			return "unknown.";
 		}

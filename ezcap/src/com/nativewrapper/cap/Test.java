@@ -38,10 +38,19 @@ public class Test {
 			} else if (eh.getType() == EtherType.IP.getType()) {
 				Ip ip = new Ip();
 				RawReader.toStruct (ip, packet.getRaw(), eh.length());
+
+				int optLen = ip.getHeaderLen() - ip.length();
+				if (optLen < 0) {
+					System.out.println ("invalid ip packet.");
+					return;
+				}
+
 				System.out.println (ip);
 
 				if (ip.getProto() == IpProtoNumber.ICMP.getProtoNum()) {
-					System.out.println ("icmp");
+					Icmp icmp = new Icmp ();
+					RawReader.toStruct (icmp, packet.getRaw(), eh.length() + ip.getHeaderLen());
+					System.out.println (icmp);
 				}
 			}
 

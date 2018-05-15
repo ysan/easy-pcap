@@ -5,30 +5,31 @@ import java.util.HashMap;
 
 public enum IcmpUnreachCode {
 
-	// netinet/ip_icmp.h
-	NET_UNREACH     ( 0, "Network Unreachable Reply"),
+	// http://www.infraexpert.com/info/5.0adsl.htm
+	// ICMP Type 3 ： Detination Unreachable
+	NET_UNREACH     ( 0, "Net Unreachable"),
 	HOST_UNREACH    ( 1, "Host Unreachable"),
 	PROT_UNREACH    ( 2, "Protocol Unreachable"),
 	PORT_UNREACH    ( 3, "Port Unreachable"),
-	FRAG_NEEDED     ( 4, "Fragmentation Needed/DF set"),
-	SR_FAILED       ( 5, "Source Route failed"),
-	NET_UNKNOWN     ( 6, ""),
-	HOST_UNKNOWN    ( 7, ""),
-	HOST_ISOLATED   ( 8, ""),
-	NET_ANO         ( 9, ""),
-	HOST_ANO        (10, ""),
-	NET_UNR_TOS     (11, ""),
-	HOST_UNR_TOS    (12, ""),
-	PKT_FILTERED    (13, "Packet filtered"),
-	PREC_VIOLATION  (14, "Precedence violation"),
-	PREC_CUTOFF     (15, "Precedence cut off");
+	FRAG_NEEDED     ( 4, "Fragmentation Needed and DF was Set"),
+	SR_FAILED       ( 5, "Source Route Failed"),
+	NET_UNKNOWN     ( 6, "Destination Network Unknown"),
+	HOST_UNKNOWN    ( 7, "Destination Host Unknown "),
+	HOST_ISOLATED   ( 8, "Source Host Isolated"),
+	NET_ANO         ( 9, "Communication with Destination Network is Administratively Prohibited"),
+	HOST_ANO        (10, "Communication with Destinaltion Host is Administratively Prohibited"),
+	NET_UNR_TOS     (11, "Destination Network Unreachable for ToS"),
+	HOST_UNR_TOS    (12, "Destination Host Unreachable for ToS"),
+	PKT_FILTERED    (13, "Communication Administratively Prohibited"),
+	PREC_VIOLATION  (14, "Host Precedence Violatio"),
+	PREC_CUTOFF     (15, "Precedence cutoff in effect");
 
 
 	private int mCode;
 	private String mDesc;
  
-	private IcmpUnreachCode (int type, String desc) {
-		mCode = type;
+	private IcmpUnreachCode (int code, String desc) {
+		mCode = code;
 		mDesc = desc;
 	}
 
@@ -37,16 +38,19 @@ public enum IcmpUnreachCode {
 	}
  
 
-	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
+	private static final Map <Integer, String> mDescMap = new HashMap <Integer, String>();
 	static {
 		for (IcmpUnreachCode entry : values()) {
-			descMap.put (entry.mCode, entry.mDesc);
+			mDescMap.put (entry.mCode, entry.mDesc);
 		}
 	}
+	public static Map get () {
+		return mDescMap;
+	}
 
-	public static String getDesc (int type) {
-		if (descMap.containsKey(type)) {
-			return descMap.get (type);
+	public static String getDesc (int code) {
+		if (mDescMap.containsKey(code)) {
+			return mDescMap.get (code);
 		} else {
 			return "unknown.";
 		}
