@@ -6,7 +6,7 @@
 	<property name="classes_dir" value="bin"/>
 
 	<property name="jar_name" value="cap.jar"/>
-	<property name="main" value="com.nativewrapper.cap.Test"/>
+	<property name="main" value="com.nativewrapper.cap.CapMain"/>
 
 	<target name="compile">
 		<mkdir dir="${classes_dir}" />

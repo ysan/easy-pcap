@@ -17,10 +17,12 @@ import com.nativewrapper.cap.protocols.*;
 import com.nativewrapper.types.*;
 
 
-public class Test {
+public class CapMain {
 	
 	static private CapJni mCap = new CapJni ();
+
 	static private IPacketListener pktListener = new IPacketListener () {
+
 		@Override
 		public void onReceivedPacket (Packet packet) {
 			System.out.println ("--------------------------");
@@ -36,21 +38,26 @@ public class Test {
 				System.out.println (ea);
 
 			} else if (eh.getType() == EtherType.IP.getType()) {
-				Ip ip = new Ip();
-				RawReader.toStruct (ip, packet.getRaw(), eh.length());
+				IpHeader iph = new IpHeader ();
+				RawReader.toStruct (iph, packet.getRaw(), eh.length());
 
-				int optLen = ip.getHeaderLen() - ip.length();
+				int optLen = iph.getHeaderLen() - iph.length();
 				if (optLen < 0) {
 					System.out.println ("invalid ip packet.");
 					return;
 				}
 
-				System.out.println (ip);
+				System.out.println (iph);
 
-				if (ip.getProto() == IpProtoNumber.ICMP.getProtoNum()) {
+				if (iph.getProto() == IpProtoNumber.ICMP.getProtoNum()) {
 					Icmp icmp = new Icmp ();
-					RawReader.toStruct (icmp, packet.getRaw(), eh.length() + ip.getHeaderLen());
+					RawReader.toStruct (icmp, packet.getRaw(), eh.length() + iph.getHeaderLen());
 					System.out.println (icmp);
+
+				} else if (iph.getProto() == IpProtoNumber.TCP.getProtoNum()) {
+					TcpHeader tcph = new TcpHeader();
+					RawReader.toStruct (tcph, packet.getRaw(), eh.length() + iph.getHeaderLen());
+					System.out.println (tcph);
 				}
 			}
 

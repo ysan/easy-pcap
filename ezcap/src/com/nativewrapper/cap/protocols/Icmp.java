@@ -33,7 +33,7 @@ public class Icmp {
 	//   .
 	//   .
 	//   .
-	// }
+	// };
 
 	@Uint8
 	private int m_icmp_type;

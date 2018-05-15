@@ -2,7 +2,7 @@ package com.nativewrapper.cap.protocols;
 
 import com.nativewrapper.types.*;
 
-public class Ip {
+public class IpHeader {
 
 	// -- netinet/ip.h --
 	// struct ip
