@@ -32,16 +32,16 @@ public enum EtherType {
 	}
  
 
-	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
+	private static final Map <Integer, String> mDescMap = new HashMap <Integer, String>();
 	static {
 		for (EtherType entry : values()) {
-			descMap.put (entry.mType, entry.mDesc);
+			mDescMap.put (entry.mType, entry.mDesc);
 		}
 	}
 
 	public static String getDesc (int type) {
-		if (descMap.containsKey(type)) {
-			return descMap.get (type);
+		if (mDescMap.containsKey(type)) {
+			return mDescMap.get (type);
 		} else {
 			return "unknown.";
 		}

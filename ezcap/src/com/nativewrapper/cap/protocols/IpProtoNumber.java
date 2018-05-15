@@ -56,10 +56,10 @@ public enum IpProtoNumber {
 		}
 	}
 
-	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
+	private static final Map <Integer, String> mDescMap = new HashMap <Integer, String>();
 	static {
 		for (IpProtoNumber entry : values()) {
-			descMap.put (entry.mProtoNum, entry.mDesc);
+			mDescMap.put (entry.mProtoNum, entry.mDesc);
 		}
 	}
 
@@ -72,8 +72,8 @@ public enum IpProtoNumber {
 	}
 
 	public static String getDesc (int protoNum) {
-		if (descMap.containsKey(protoNum)) {
-			return descMap.get (protoNum);
+		if (mDescMap.containsKey(protoNum)) {
+			return mDescMap.get (protoNum);
 		} else {
 			return "unknown.";
 		}

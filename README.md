@@ -30,7 +30,7 @@ Please edit the Makefile.
 	LIBS        := -lpthread -lpcap
 	(snip)
 
-Usage (launch cli)
+Usage
 --------
 Please specify the target interface name after starting run.sh.
 
@@ -73,4 +73,4 @@ Console command
 Platforms
 ------------
 Generic Linux will be ok. (confirmed worked on Fedora20)  
-Requires are java, libpcap.
+Require is libpcap.

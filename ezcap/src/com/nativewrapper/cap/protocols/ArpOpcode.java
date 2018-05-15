@@ -28,16 +28,16 @@ public enum ArpOpcode {
 	}
  
 
-	private static final Map <Integer, String> descMap = new HashMap <Integer, String>();
+	private static final Map <Integer, String> mDescMap = new HashMap <Integer, String>();
 	static {
 		for (ArpOpcode entry : values()) {
-			descMap.put (entry.mOpcode, entry.mDesc);
+			mDescMap.put (entry.mOpcode, entry.mDesc);
 		}
 	}
 
 	public static String getDesc (int opcode) {
-		if (descMap.containsKey(opcode)) {
-			return descMap.get (opcode);
+		if (mDescMap.containsKey(opcode)) {
+			return mDescMap.get (opcode);
 		} else {
 			return "unknown.";
 		}
