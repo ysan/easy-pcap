@@ -61,13 +61,13 @@ Console command
 	quit
 &nbsp;&nbsp;&nbsp;&nbsp;process exit
 
-	set expression
+	setf expression
 &nbsp;&nbsp;&nbsp;&nbsp;set pcap filter ***expression***   
 &nbsp;&nbsp;&nbsp;&nbsp;selects which packets will be dumped. If no expression is given, all packets on  
 &nbsp;&nbsp;&nbsp;&nbsp;the net will be dumped. Otherwise, only packets for which expression is true  
 &nbsp;&nbsp;&nbsp;&nbsp;will be dumped.
 
-	clear
+	clearf
 &nbsp;&nbsp;&nbsp;&nbsp;clear pcap filter
 
 Platforms

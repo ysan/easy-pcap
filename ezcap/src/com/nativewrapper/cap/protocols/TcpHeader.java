@@ -92,40 +92,40 @@ public class TcpHeader {
 		return m_ack_seq;
 	}
 
-	public int getRes1 () {
+	public int getDoff () {
 		return (m_code >> 12) & 0xf;
 	}
 
-	public int getDoff () {
+	public int getRes1 () {
 		return (m_code >> 8) & 0xf;
 	}
 
-	public int getFin () {
-		return (m_code >> 7) & 0x1;
-	}
-
-	public int getSyn () {
-		return (m_code >> 6) & 0x1;
-	}
-
-	public int getRst () {
-		return (m_code >> 5) & 0x1;
-	}
-
-	public int getPsh () {
-		return (m_code >> 4) & 0x1;
-	}
-
-	public int getAck () {
-		return (m_code >> 3) & 0x1;
+	public int getRes2 () {
+		return (m_code >> 6) & 0x3;
 	}
 
 	public int getUrg () {
+		return (m_code >> 5) & 0x1;
+	}
+
+	public int getAck () {
+		return (m_code >> 4) & 0x1;
+	}
+
+	public int getPsh () {
+		return (m_code >> 3) & 0x1;
+	}
+
+	public int getRst () {
 		return (m_code >> 2) & 0x1;
 	}
 
-	public int getRes2 () {
-		return m_code & 0x3;
+	public int getSyn () {
+		return (m_code >> 1) & 0x1;
+	}
+
+	public int getFin () {
+		return m_code & 0x1;
 	}
 
 	public int getWinSize () {
@@ -150,12 +150,12 @@ public class TcpHeader {
 			"m_code=[0x%04x](doff:%d, codeBit:%s%s%s%s%s%s)",
 			m_code,
 			getDoff(),
-			getFin() == 1 ? "FIN," : "",
-			getSyn() == 1 ? "SYN," : "",
-			getRst() == 1 ? "RST," : "",
-			getPsh() == 1 ? "PSH," : "",
+			getUrg() == 1 ? "URG," : "",
 			getAck() == 1 ? "ACK," : "",
-			getUrg() == 1 ? "URG," : ""
+			getPsh() == 1 ? "PSH," : "",
+			getRst() == 1 ? "RST," : "",
+			getSyn() == 1 ? "SYN," : "",
+			getFin() == 1 ? "FIN," : ""
 		);
 		String f = String.format ("m_window=[%d]", m_window);
 		String g = String.format ("m_check=[0x%04x]", m_check);

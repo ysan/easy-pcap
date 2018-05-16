@@ -136,13 +136,13 @@ public class CapMain {
 					System.out.println ("### stop ###");
 					mCap.stop();
 
-				} else if (line.equals("clear")) {
+				} else if (line.equals("clearf")) {
 					System.out.println ("### clear filter ###");
 					mCap.clearFilter();
 
 				} else  {
 					String filter = "";
-					String regex = "^set +";
+					String regex = "^setf +";
 					Pattern p = Pattern.compile(regex);
 					Matcher m = p.matcher (line);
 					if (m.find()) {
