@@ -21,8 +21,8 @@ public class EtherHeader {
 	@Uint16
 	private int m_ether_type;
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 	private static final int ETH_ALEN = 6;
 
@@ -39,8 +39,8 @@ public class EtherHeader {
 		return m_ether_type;
 	}
 
-	public int length () {
-		return mLength;
+	public int structSize () {
+		return mStructSize;
 	}
 
 	@Override
@@ -62,6 +62,6 @@ public class EtherHeader {
 		}
 		src += "]";
 		String type = String.format ("m_ether_type=[0x%04x](%s)", m_ether_type ,EtherType.getDesc(m_ether_type));
-		return src + " " + dst + " " + type + " mLength=[" + mLength + "]";
+		return src + " " + dst + " " + type + " mStructSize=[" + mStructSize + "]";
 	}
 }

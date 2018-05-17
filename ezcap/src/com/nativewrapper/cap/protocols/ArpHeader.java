@@ -29,8 +29,8 @@ public class ArpHeader {
 	@Uint16
 	private int m_ar_op;
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 
 	public int getHard () {
@@ -53,8 +53,8 @@ public class ArpHeader {
 		return m_ar_op;
 	}
 
-	public int length () {
-		return mLength;
+	public int structSize () {
+		return mStructSize;
 	}
 
 	@Override
@@ -64,6 +64,6 @@ public class ArpHeader {
 		String c = String.format ("m_ar_hln=[%d]", m_ar_hln);
 		String d = String.format ("m_ar_pln=[%d]", m_ar_pln);
 		String e = String.format ("m_ar_op=[%d](%s)", m_ar_op, ArpOpcode.getDesc(m_ar_op));
-		return a + " " + b + " " + c + " " + d + " " + e + " mLength=[" + mLength + "]";
+		return a + " " + b + " " + c + " " + d + " " + e + " mStructSize=[" + mStructSize + "]";
 	}
 }

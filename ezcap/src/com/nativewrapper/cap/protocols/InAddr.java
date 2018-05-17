@@ -14,16 +14,16 @@ public class InAddr {
 	@Uint32
 	private long m_s_addr;
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 
 	public long getAddr () {
 		return m_s_addr;
 	}
 
-	public int length () {
-		return mLength;
+	public int structSize () {
+		return mStructSize;
 	}
 
 	@Override
@@ -35,6 +35,6 @@ public class InAddr {
 							(m_s_addr >>  8) & 0xff,
 							m_s_addr & 0xff
 						);
-		return str + " mLength=[" + mLength + "]";
+		return str + " mStructSize=[" + mStructSize + "]";
 	}
 }

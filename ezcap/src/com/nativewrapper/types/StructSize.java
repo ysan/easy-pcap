@@ -8,5 +8,5 @@ import java.nio.ByteOrder;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Length {
+public @interface StructSize {
 }

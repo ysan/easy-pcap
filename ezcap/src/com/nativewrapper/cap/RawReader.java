@@ -131,8 +131,8 @@ public final class RawReader {
 							e.printStackTrace();
 						}
 
-					} else if (annotation.annotationType().equals(Length.class)) {
-						// Length.class must be last
+					} else if (annotation.annotationType().equals(StructSize.class)) {
+						// StructSize.class must be last
 						try {
 							field.set(obj, len);
 						} catch (IllegalAccessException e) {

@@ -44,8 +44,8 @@ public class Icmp {
 	@Uint16
 	private int m_icmp_cksum;
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 
 	public int getType () {
@@ -60,11 +60,16 @@ public class Icmp {
 		return m_icmp_cksum;
 	}
 
+	public int structSize () {
+		return mStructSize;
+	}
+
+
 	@Override
 	public String toString () {
 		String a = String.format ("m_icmp_type=[%d](%s)", m_icmp_type, IcmpType.getDesc(m_icmp_type));
 		String b = String.format ("m_icmp_code=[%d](%s)", m_icmp_code, getDesc (m_icmp_type, m_icmp_code));
 		String c = String.format ("m_icmp_cksum=[%d]", m_icmp_cksum);
-		return a + " " + b + " " + c + " mLength=[" + mLength + "]";
+		return a + " " + b + " " + c + " mStructSize=[" + mStructSize + "]";
 	}
 }

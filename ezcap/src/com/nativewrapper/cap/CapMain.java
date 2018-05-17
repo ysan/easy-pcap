@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -25,7 +26,7 @@ public class CapMain {
 
 		@Override
 		public void onReceivedPacket (Packet packet) {
-			System.out.println ("--------------------------");
+			System.out.println ("----------------------------------------------------");
 			System.out.println (packet);
 
 			EtherHeader eh = new EtherHeader();
@@ -33,36 +34,73 @@ public class CapMain {
 			System.out.println (eh);
 
 			if (eh.getType() == EtherType.ARP.getType()) {
-				EtherArp ea = new EtherArp();
-				RawReader.toStruct (ea, packet.getRaw(), eh.length());
-				System.out.println (ea);
+				EtherArp arp = new EtherArp();
+				RawReader.toStruct (arp, packet.getRaw(), eh.structSize());
+				System.out.println (arp);
 
 			} else if (eh.getType() == EtherType.IP.getType()) {
+				// IPv4
 				IpHeader iph = new IpHeader ();
-				RawReader.toStruct (iph, packet.getRaw(), eh.length());
+				RawReader.toStruct (iph, packet.getRaw(), eh.structSize());
 
-				int optLen = iph.getHeaderLen() - iph.length();
+				int optLen = iph.getHeaderLen() - iph.structSize();
 				if (optLen < 0) {
-					System.out.println ("invalid ip packet.");
+					System.out.println ("invalid packet.");
 					return;
 				}
 
 				System.out.println (iph);
 
 				if (iph.getProto() == IpProtoNumber.ICMP.getProtoNum()) {
+					// ICMP
 					Icmp icmp = new Icmp ();
-					RawReader.toStruct (icmp, packet.getRaw(), eh.length() + iph.getHeaderLen());
+					RawReader.toStruct (icmp, packet.getRaw(), eh.structSize() + iph.getHeaderLen());
 					System.out.println (icmp);
 
 				} else if (iph.getProto() == IpProtoNumber.TCP.getProtoNum()) {
+					// TCP
 					TcpHeader tcph = new TcpHeader();
-					RawReader.toStruct (tcph, packet.getRaw(), eh.length() + iph.getHeaderLen());
+					RawReader.toStruct (tcph, packet.getRaw(), eh.structSize() + iph.getHeaderLen());
 					System.out.println (tcph);
+
+					int payloadLen = iph.getTotalLen() - iph.getHeaderLen() - tcph.getDoff();
+					System.out.println ("payloadLen=[" + payloadLen + "]");
+					if (payloadLen < 0) {
+						System.out.println ("invalid packet.");
+						return;
+					} else if (payloadLen > 0) {
+						int s = eh.structSize() + iph.getHeaderLen() + tcph.getDoff();
+						byte [] b = Arrays.copyOfRange (packet.getRaw(), s, packet.length());
+						System.out.println ("::payload dump::");
+						RawReader.hexDump (b);
+					} else {
+						System.out.println ("header only.");
+					}
+
+				} else if (iph.getProto() == IpProtoNumber.UDP.getProtoNum()) {
+					// UDP
+					UdpHeader udph = new UdpHeader();
+					RawReader.toStruct (udph, packet.getRaw(), eh.structSize() + iph.getHeaderLen());
+					System.out.println (udph);
+
+					int payloadLen = udph.getTotalLen() - udph.structSize();
+					System.out.println ("payloadLen=[" + payloadLen + "]");
+					if (payloadLen < 0) {
+						System.out.println ("invalid packet.");
+						return;
+					} else if (payloadLen > 0) {
+						int s = eh.structSize() + iph.getHeaderLen() + udph.structSize();
+						byte [] b = Arrays.copyOfRange (packet.getRaw(), s, packet.length());
+						System.out.println ("::payload dump::");
+						RawReader.hexDump (b);
+					} else {
+						System.out.println ("header only.");
+					}
 				}
 			}
 
-			System.out.println ("hexDump:");
-			RawReader.hexDump (packet.getRaw());
+//			System.out.println ("::hexDump::");
+//			RawReader.hexDump (packet.getRaw());
 		}
 	};
 

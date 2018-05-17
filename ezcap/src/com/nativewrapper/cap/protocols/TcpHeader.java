@@ -72,8 +72,8 @@ public class TcpHeader {
 	@Uint16
 	private int m_urg_ptr;
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 
 	public int getSrcPort () {
@@ -93,7 +93,7 @@ public class TcpHeader {
 	}
 
 	public int getDoff () {
-		return (m_code >> 12) & 0xf;
+		return ((m_code >> 12) & 0xf) * 4;
 	}
 
 	public int getRes1 () {
@@ -140,6 +140,11 @@ public class TcpHeader {
 		return m_urg_ptr;
 	}
 
+	public int structSize () {
+		return mStructSize;
+	}
+
+
 	@Override
 	public String toString () {
 		String a = String.format ("m_source=[%d]", m_source);
@@ -160,6 +165,6 @@ public class TcpHeader {
 		String f = String.format ("m_window=[%d]", m_window);
 		String g = String.format ("m_check=[0x%04x]", m_check);
 		String h = String.format ("m_urg_ptr=[%d]", m_urg_ptr);
-		return a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + g + " " + h + " mLength=[" + mLength + "]";
+		return a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + g + " " + h + " mStructSize=[" + mStructSize + "]";
 	}
 }

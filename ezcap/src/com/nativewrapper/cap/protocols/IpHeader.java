@@ -49,8 +49,8 @@ public class IpHeader {
 	@Struct
 	private InAddr m_ip_dst = new InAddr();
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 
 	public int getVer () {
@@ -97,8 +97,8 @@ public class IpHeader {
 		return m_ip_dst;
 	}
 
-	public int length () {
-		return mLength;
+	public int structSize () {
+		return mStructSize;
 	}
 
 	@Override
@@ -111,6 +111,6 @@ public class IpHeader {
 		String f = String.format ("m_ip_ttl=[%d]", m_ip_ttl);
 		String g = String.format ("m_ip_p=[%d](%s)", m_ip_p, IpProtoNumber.getName(m_ip_p));
 		String h = String.format ("m_ip_sum=[0x%04x]", m_ip_sum);
-		return a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + g + " " + h + " m_ip_src=[" + m_ip_src + "]" + " m_ip_dst=[" + m_ip_dst + "]" + " mLength=[" + mLength + "]";
+		return a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + g + " " + h + " m_ip_src=[" + m_ip_src + "]" + " m_ip_dst=[" + m_ip_dst + "]" + " mStructSize=[" + mStructSize + "]";
 	}
 }

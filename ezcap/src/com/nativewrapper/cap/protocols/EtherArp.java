@@ -28,8 +28,8 @@ public class EtherArp {
 	@Uint8
 	private int [] m_arp_tpa = new int [4];
 
-	@Length
-	private int mLength;
+	@StructSize
+	private int mStructSize;
 
 	private static final int ETH_ALEN = 6;
 
@@ -54,8 +54,8 @@ public class EtherArp {
 		return m_arp_tpa;
 	}
 
-	public int length () {
-		return mLength;
+	public int structSize () {
+		return mStructSize;
 	}
 
 	@Override
@@ -92,6 +92,6 @@ public class EtherArp {
 			tpa += String.format ("%d", m_arp_tpa[i]);
 		}
 		tpa += "]";
-		return m_ea_hdr + "\n" + sha + " " + spa + " " + tha + " " + tpa + " mLength=[" + mLength + "]";
+		return m_ea_hdr + "\n" + sha + " " + spa + " " + tha + " " + tpa + " mStructSize=[" + mStructSize + "]";
 	}
 }
