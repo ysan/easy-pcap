@@ -113,6 +113,8 @@ public class CapMain {
 			System.exit(1);
 		}
 
+		System.out.print ("\n" + mCap.getVersion() + "\n");
+
 		List<Interface> ifList = mCap.getInterfaceList();
 		if (ifList.size() == 0) {
 			System.exit(1);

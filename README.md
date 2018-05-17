@@ -52,14 +52,17 @@ capture start and console start.
 
 Console command
 ------------
+	ver
+&nbsp;&nbsp;&nbsp;&nbsp;show libpcap version.
+
 	start
-&nbsp;&nbsp;&nbsp;&nbsp;capture start/restart
+&nbsp;&nbsp;&nbsp;&nbsp;capture start/restart.
 
 	stop
-&nbsp;&nbsp;&nbsp;&nbsp;capture stop
+&nbsp;&nbsp;&nbsp;&nbsp;capture stop.
 
 	quit
-&nbsp;&nbsp;&nbsp;&nbsp;process exit
+&nbsp;&nbsp;&nbsp;&nbsp;process exit.
 
 	setf expression
 &nbsp;&nbsp;&nbsp;&nbsp;set pcap filter ***expression***   
@@ -67,8 +70,11 @@ Console command
 &nbsp;&nbsp;&nbsp;&nbsp;the net will be dumped. Otherwise, only packets for which expression is true  
 &nbsp;&nbsp;&nbsp;&nbsp;will be dumped.
 
+	getf
+&nbsp;&nbsp;&nbsp;&nbsp;show now pcap filter.
+
 	clearf
-&nbsp;&nbsp;&nbsp;&nbsp;clear pcap filter
+&nbsp;&nbsp;&nbsp;&nbsp;clear pcap filter.
 
 Platforms
 ------------
