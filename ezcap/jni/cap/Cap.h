@@ -33,7 +33,7 @@ using namespace ProxyThread;
 
 
 #define INTERFACE_NAME_LEN		(32)
-#define FILTER_STRING_LEN		(128)
+#define FILTER_STRING_LEN		(512)
 
 typedef enum {
 	EN_MSG_START_CAPTURE = 0,
@@ -108,9 +108,11 @@ public:
 	bool createCbThread (void);
 	void destroyCbThread (void);
 
+	const char* getVersion (void);
 	void setInterface (const char* p, int len);
 	bool setFilter (const char* p, int len);
 	bool setFilter (void);
+	char* getFilter (void);
 	bool clearFilter (void);
 
 	bool open (void);

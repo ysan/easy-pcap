@@ -164,6 +164,10 @@ public class CapMain {
 					System.out.println ("### quit ###");
 					break;
 
+				} else if (line.equals("ver")) {
+					System.out.println ("### version ###");
+					System.out.println (mCap.getVersion());
+
 				} else if (line.equals("start")) {
 					System.out.println ("### start ###");
 					if (!mCap.start()) {
@@ -173,6 +177,10 @@ public class CapMain {
 				} else if (line.equals("stop")) {
 					System.out.println ("### stop ###");
 					mCap.stop();
+
+				} else if (line.equals("getf")) {
+					System.out.println ("### show now filter ###");
+					System.out.println ("[" + mCap.getFilter() + "]");
 
 				} else if (line.equals("clearf")) {
 					System.out.println ("### clear filter ###");

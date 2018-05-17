@@ -51,6 +51,11 @@ void CCap::destroyCbThread (void)
 	waitDestroy();
 }
 
+const char* CCap::getVersion (void)
+{
+	return pcap_lib_version();
+}
+
 void CCap::setInterface (const char* p, int len)
 {
 	if (p && (len > 0)) {
@@ -65,12 +70,21 @@ bool CCap::setFilter (const char* p, int len)
 		return false;
 	}
 
-	// only members(mFilter) set
+	if (!mpCap) {
+		printf ("pcap_open not yet.\n");
+		return false;
+	}
+
+	char bak [FILTER_STRING_LEN] = {0};
+	strncpy (bak, mFilter, strlen(mFilter));
+
 	memset (mFilter, 0x00, sizeof(mFilter));
 	strncpy (mFilter, p, len > (FILTER_STRING_LEN -1) ? (FILTER_STRING_LEN -1) : len);
 
-	if ((mpCap) && (strlen(mFilter) > 0)) {
+	if (strlen(mFilter) > 0) {
 		if (!setFilter()) {
+			memset (mFilter, 0x00, sizeof(mFilter));
+			strncpy (mFilter, bak, strlen(bak));
 			return false;
 		}
 	}
@@ -81,6 +95,7 @@ bool CCap::setFilter (const char* p, int len)
 bool CCap::setFilter (void)
 {
 	if (!mpCap) {
+		printf ("pcap_open not yet.\n");
 		return false;
 	}
 
@@ -95,6 +110,11 @@ bool CCap::setFilter (void)
 	}
 
 	return true;
+}
+
+char* CCap::getFilter (void)
+{
+	return mFilter;
 }
 
 bool CCap::clearFilter (void)
@@ -146,6 +166,7 @@ bool CCap::open (void)
 void CCap::close (void)
 {
 	if (!mpCap) {
+		printf ("pcap_open not yet.\n");
 		return ;
 	}
 
@@ -174,6 +195,7 @@ void CCap::start (void)
 void CCap::stop (void)
 {
 	if (!mpCap) {
+		printf ("pcap_open not yet.\n");
 		return ;
 	}
 

@@ -60,6 +60,28 @@ JNIEXPORT void JNICALL Java_com_nativewrapper_cap_CapJni_nativeFin
 
 /*
  * Class:     com_nativewrapper_cap_CapJni
+ * Method:    nativeGetVersion
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_nativewrapper_cap_CapJni_nativeGetVersion
+  (JNIEnv *env, jobject thiz)
+{
+	std::lock_guard<std::mutex> lock (g_mutex);
+
+	CCap *pCap = CCap::getInstance();
+	const char *pVer = pCap->getVersion();
+	if (!pVer) {
+		return (jstring)NULL;
+	}
+
+	jstring jstrVer = NULL;
+	convCharArrayToJstring (env, pVer, jstrVer);
+
+	return jstrVer;
+}
+
+/*
+ * Class:     com_nativewrapper_cap_CapJni
  * Method:    nativeSetInterface
  * Signature: (Ljava/lang/String;)V
  */
@@ -92,6 +114,28 @@ JNIEXPORT jboolean JNICALL Java_com_nativewrapper_cap_CapJni_nativeSetFilter
 	convJstringToCharArray (env, filter, szFilter, sizeof(szFilter));
 
 	return pCap->setFilter (szFilter, strlen(szFilter));
+}
+
+/*
+ * Class:     com_nativewrapper_cap_CapJni
+ * Method:    nativeGetFilter
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_nativewrapper_cap_CapJni_nativeGetFilter
+  (JNIEnv *env, jobject thiz)
+{
+	std::lock_guard<std::mutex> lock (g_mutex);
+
+	CCap *pCap = CCap::getInstance();
+	const char *pFilter = pCap->getFilter();
+	if (!pFilter) {
+		return (jstring)NULL;
+	}
+
+	jstring jstrFilter = NULL;
+	convCharArrayToJstring (env, pFilter, jstrFilter);
+
+	return jstrFilter;
 }
 
 /*

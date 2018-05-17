@@ -25,6 +25,14 @@ JNIEXPORT void JNICALL Java_com_nativewrapper_cap_CapJni_nativeFin
 
 /*
  * Class:     com_nativewrapper_cap_CapJni
+ * Method:    nativeGetVersion
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_nativewrapper_cap_CapJni_nativeGetVersion
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_nativewrapper_cap_CapJni
  * Method:    nativeSetInterface
  * Signature: (Ljava/lang/String;)V
  */
@@ -38,6 +46,14 @@ JNIEXPORT void JNICALL Java_com_nativewrapper_cap_CapJni_nativeSetInterface
  */
 JNIEXPORT jboolean JNICALL Java_com_nativewrapper_cap_CapJni_nativeSetFilter
   (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_nativewrapper_cap_CapJni
+ * Method:    nativeGetFilter
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_nativewrapper_cap_CapJni_nativeGetFilter
+  (JNIEnv *, jobject);
 
 /*
  * Class:     com_nativewrapper_cap_CapJni

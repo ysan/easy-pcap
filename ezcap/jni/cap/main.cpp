@@ -28,7 +28,7 @@ void test (void)
 		return ;
 	}
 
-	pCap->setInterface ("enp24s0", strlen("enp24s0"));
+	pCap->setInterface ("ens33", strlen("ens33"));
 
 	char buf[1024] = {0};
 	while (1) {
@@ -36,11 +36,17 @@ void test (void)
 		fgets (buf, sizeof(buf)-1, stdin);
 		buf [strlen(buf) -1] = 0x00; // delete LF
 
-		if ((strlen(buf) == 1) && (strncmp(buf, "q", strlen(buf)) == 0)) {
+		if ((strlen(buf) == 1) && (strncmp(buf, "quit", strlen(buf)) == 0)) {
 			// quit
 			break;
 
-		} else if ((strlen(buf) == strlen("clear")) && (strncmp(buf, "clear", strlen(buf)) == 0)) {
+		} else if ((strlen(buf) == strlen("v")) && (strncmp(buf, "v", strlen(buf)) == 0)) {
+			printf ("%s\n", pCap->getVersion ());
+
+		} else if ((strlen(buf) == strlen("getf")) && (strncmp(buf, "getf", strlen(buf)) == 0)) {
+			printf ("now filter [%s]\n", pCap->getFilter ());
+
+		} else if ((strlen(buf) == strlen("clearf")) && (strncmp(buf, "clearf", strlen(buf)) == 0)) {
 			pCap->clearFilter ();
 
 		} else if ((strlen(buf) == strlen("start")) && (strncmp(buf, "start", strlen(buf)) == 0)) {

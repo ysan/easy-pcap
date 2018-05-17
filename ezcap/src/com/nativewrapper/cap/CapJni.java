@@ -11,8 +11,10 @@ public class CapJni {
 	// native
 	private native boolean nativeInit ();
 	private native void nativeFin ();
+	private native String nativeGetVersion ();
 	private native void nativeSetInterface (String name);
 	private native boolean nativeSetFilter (String filter);
+	private native String nativeGetFilter ();
 	private native boolean nativeClearFilter ();
 	private native boolean nativeStart ();
 	private native void nativeStop ();
@@ -29,6 +31,10 @@ public class CapJni {
 		nativeFin ();
 	}
 
+	public String getVersion () {
+		return nativeGetVersion ();
+	}
+
 	public void setInterface (String name) {
 		if (name == null) {
 			return;
@@ -43,6 +49,10 @@ public class CapJni {
 		}
 
 		return nativeSetFilter (filter);
+	}
+
+	public String getFilter () {
+		return nativeGetFilter();
 	}
 
 	public boolean clearFilter () {
